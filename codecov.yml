@@ -1,0 +1,20 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: up
+  range: "50...100"
+
+ignore:
+  - Patents/App_Start/.*
+  - Patents/Global.asax.cs 
+  - Patents/Migrations/.*
+  - Patents/Models/AccountModels/.*
+  - Patents/Controllers/AccountController.cs
+  - Patents/Controllers/MeetingsController.cs
+  - Patents/Models/ViewModels/LoginModel
+  - Patents/Models/ViewModels/RegisterModel
+  - Patents/Models/Repositories/.*
+  - Patents/Models/ContextInitializer.cs

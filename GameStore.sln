@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore", "GameStore\GameStore.csproj", "{7F5C5842-AF99-49E5-9B76-88CACCCDC5AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{7F5C5842-AF99-49E5-9B76-88CACCCDC5AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34F56005-D386-4C73-957F-0448BA5ED792} = {34F56005-D386-4C73-957F-0448BA5ED792}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F4EFC17E-A5C1-4733-A832-7128BC406E72}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34F56005-D386-4C73-957F-0448BA5ED792} = {34F56005-D386-4C73-957F-0448BA5ED792}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreDomain", "StoreDomain\StoreDomain.csproj", "{34F56005-D386-4C73-957F-0448BA5ED792}"
 EndProject

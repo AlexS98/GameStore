@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace GameStore.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {

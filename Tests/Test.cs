@@ -1,4 +1,4 @@
-﻿using GameStore.Controllers;
+﻿using WebUI.Controllers;
 using System.Web.Mvc;
 using Xunit;
 

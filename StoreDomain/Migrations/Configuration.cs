@@ -9,7 +9,7 @@ namespace StoreDomain.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(StoreDomain.Concrete.EFDbContext context)
+        protected override void Seed(Concrete.EFDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

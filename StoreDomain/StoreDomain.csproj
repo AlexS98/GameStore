@@ -47,19 +47,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IPerson.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\GenericRepository.cs" />
     <Compile Include="Entities\Admin.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Game.cs" />
+    <Compile Include="Entities\GameAddition.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserCabinet.cs" />
+    <Compile Include="Migrations\201806101914343_Initialize.cs" />
+    <Compile Include="Migrations\201806101914343_Initialize.Designer.cs">
+      <DependentUpon>201806101914343_Initialize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806101918397_UpdateModels.cs" />
+    <Compile Include="Migrations\201806101918397_UpdateModels.Designer.cs">
+      <DependentUpon>201806101918397_UpdateModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstract\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806101914343_Initialize.resx">
+      <DependentUpon>201806101914343_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806101918397_UpdateModels.resx">
+      <DependentUpon>201806101918397_UpdateModels.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

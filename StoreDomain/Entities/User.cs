@@ -1,10 +1,13 @@
 ﻿using StoreDomain.Abstract;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("WebUI")]
 namespace StoreDomain.Entities
 {
     class User : IPerson
     {
+        public User() { }
         public int UserId { get; set; }
         [Required]
         public string Nickname { get; set; }

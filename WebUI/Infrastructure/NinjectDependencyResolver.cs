@@ -1,4 +1,7 @@
 ﻿using Ninject;
+using StoreDomain.Abstract;
+using StoreDomain.Concrete;
+using StoreDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -37,9 +40,15 @@ namespace GameStore.WebUI.Infrastructure
             //});
             //kernel.Bind<IProductRepository>().ToConstant(mock.Object);
 
-            /*
-            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+            kernel.Bind<IGenericRepository<User>>().To<GenericRepository<User>>();
+            kernel.Bind<IGenericRepository<Comment>>().To<GenericRepository<Comment>>();
+            kernel.Bind<IGenericRepository<Game>>().To<GenericRepository<Game>>();
+            kernel.Bind<IGenericRepository<GameAddition>>().To<GenericRepository<GameAddition>>();
+            kernel.Bind<IGenericRepository<Admin>>().To<GenericRepository<Admin>>();
+            kernel.Bind<IGenericRepository<Company>>().To<GenericRepository<Company>>();
+            kernel.Bind<IGenericRepository<UserCabinet>>().To<GenericRepository<UserCabinet>>();
 
+            /*
             EmailSettings emailSettings = new EmailSettings
             {
                 WriteAsFile = bool.Parse(ConfigurationManager
@@ -51,7 +60,7 @@ namespace GameStore.WebUI.Infrastructure
             kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
             ///********************************************************///
 
-            
+
         }
     }
 }

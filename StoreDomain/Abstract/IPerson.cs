@@ -1,13 +1,17 @@
-﻿namespace StoreDomain.Abstract
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("WebUI")]
+namespace StoreDomain.Abstract
 {
-    enum UserRole
+    public enum UserRole
     {
-        User = 0,
-        Moderator = 1,
-        Admin = 2
+        Outsider = 0,
+        User = 1,
+        Moderator = 2,
+        Admin = 3
     }
 
-    interface IPerson
+    public interface IPerson
     {
         string Nickname { get; set; }
         string Email { get; set; }

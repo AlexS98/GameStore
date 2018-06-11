@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IGenericRepository.cs" />
     <Compile Include="Abstract\IPerson.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\GenericRepository.cs" />

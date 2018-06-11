@@ -1,12 +1,15 @@
-﻿using System;
+﻿using StoreDomain.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("WebUI")]
 namespace StoreDomain.Concrete
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class 
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;

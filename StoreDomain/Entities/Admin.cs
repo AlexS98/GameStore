@@ -1,11 +1,11 @@
-﻿using StoreDomain.Abstract;
+﻿using GameStore.StoreDomain.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Entities
+namespace GameStore.StoreDomain.Entities
 {
-    class Admin : IPerson
+    public class Admin : IPerson
     {
         public Admin() { }
         public int AdminId { get; set; }
@@ -23,7 +23,7 @@ namespace StoreDomain.Entities
 
         public int GetPersonId()
         {
-            throw new System.NotImplementedException();
+            return AdminId;
         }
     }
 }

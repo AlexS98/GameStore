@@ -1,8 +1,8 @@
-﻿using StoreDomain.Entities;
+﻿using GameStore.StoreDomain.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace StoreDomain.Concrete
+namespace GameStore.StoreDomain.Concrete
 {
     public class EFDbContext : DbContext
     {

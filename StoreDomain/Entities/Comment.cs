@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Entities
+namespace GameStore.StoreDomain.Entities
 {
-    class Comment
+    public class Comment
     {
         public int CommentId { get; set; }
         [Required]

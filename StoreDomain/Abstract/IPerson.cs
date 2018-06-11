@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Abstract
+namespace GameStore.StoreDomain.Abstract
 {
     public enum UserRole
     {

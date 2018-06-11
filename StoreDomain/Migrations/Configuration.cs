@@ -1,8 +1,8 @@
-namespace StoreDomain.Migrations
+namespace GameStore.StoreDomain.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<StoreDomain.Concrete.EFDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Concrete.EFDbContext>
     {
         public Configuration()
         {

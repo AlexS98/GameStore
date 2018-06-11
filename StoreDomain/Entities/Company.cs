@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Entities
+namespace GameStore.StoreDomain.Entities
 {
-    enum CompanyType
+    public enum CompanyType
     {
         limited_company = 0,
         limited_partnership = 1,
@@ -15,7 +13,7 @@ namespace StoreDomain.Entities
         subsidiary_company = 6
     }
 
-    class Company
+    public class Company
     {
         public int CompanyId { get; set; }
         [Required]

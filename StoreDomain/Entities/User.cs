@@ -1,19 +1,15 @@
-﻿using StoreDomain.Abstract;
+﻿using GameStore.StoreDomain.Abstract;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Entities
+namespace GameStore.StoreDomain.Entities
 {
-    class User : IPerson
+    public class User : IPerson
     {
         public User() { }
         public int UserId { get; set; }
         [Required]
         public string Nickname { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
@@ -23,7 +19,7 @@ namespace StoreDomain.Entities
 
         public int GetPersonId()
         {
-            throw new System.NotImplementedException();
+            return UserId;
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Entities
+namespace GameStore.StoreDomain.Entities
 {
-    enum GameType
+    public enum GameType
     {
         Action = 0,
         Adventure = 1,
@@ -17,14 +15,14 @@ namespace StoreDomain.Entities
     }
 
     [Flags]
-    enum GamePlatforms
+    public enum GamePlatforms
     {
         Windows = 1,
         Linux = 2,
         MacOS = 4
     }
 
-    class Game
+    public class Game
     {
         public int GameId { get; set; }
         [Required]

@@ -1,4 +1,4 @@
-﻿using StoreDomain.Abstract;
+﻿using GameStore.StoreDomain.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,10 +6,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Concrete
+namespace GameStore.StoreDomain.Concrete
 {
-    class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class 
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class 
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;

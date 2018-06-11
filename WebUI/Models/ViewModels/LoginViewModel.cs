@@ -7,6 +7,8 @@ namespace WebUI.Models.ViewModels
         [Required]
         public string Nickname { get; set; }
         [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
     }
 }

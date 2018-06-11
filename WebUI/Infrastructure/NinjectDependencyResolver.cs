@@ -1,7 +1,7 @@
 ﻿using Ninject;
-using StoreDomain.Abstract;
-using StoreDomain.Concrete;
-using StoreDomain.Entities;
+using GameStore.StoreDomain.Abstract;
+using GameStore.StoreDomain.Concrete;
+using GameStore.StoreDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;

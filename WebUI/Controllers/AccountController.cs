@@ -1,21 +1,19 @@
 ﻿using Microsoft.Owin.Security;
-using StoreDomain.Abstract;
-using StoreDomain.Entities;
+using GameStore.StoreDomain.Abstract;
+using GameStore.StoreDomain.Entities;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using WebUI.Models.ViewModels;
 
-[assembly: InternalsVisibleTo("StoreDomain")]
-namespace WebUI.Controllers
+namespace GameStore.WebUI.Controllers
 {
-    class AccountController : Controller
+    public class AccountController : Controller
     {
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-        private readonly IGenericRepository<User> userRepository;
-        private readonly IGenericRepository<Admin> adminRepository;
+        private IGenericRepository<User> userRepository;
+        private IGenericRepository<Admin> adminRepository;
 
         public AccountController(IGenericRepository<User> users, IGenericRepository<Admin> admins)
         {
@@ -24,7 +22,7 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult UserLogin()
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
             return View();
@@ -36,9 +34,11 @@ namespace WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                IPerson user = null;
-                user.Role = UserRole.Outsider;
-                user = userRepository.Get().First(u => u.Nickname == model.Nickname &&
+                IPerson user = new User()
+                {
+                    Role = UserRole.Outsider
+                };
+                user = userRepository.Get().FirstOrDefault(u => u.Nickname == model.Nickname &&
                         u.Password == model.Password);
 
                 if (user.Role == UserRole.Outsider)
@@ -52,31 +52,7 @@ namespace WebUI.Controllers
                 }
             }
             return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AdminLogin(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                IPerson admin = null;
-                admin.Role = UserRole.Outsider;
-                admin = adminRepository.Get().First(u => u.Nickname == model.Nickname &&
-                        u.Password == model.Password);
-
-                if (admin.Role == UserRole.Outsider)
-                {
-                    ModelState.AddModelError("", @"Wrong login or password.");
-                }
-                else
-                {
-                    LoginClaims(admin);
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            return View(model);
-        }
+        }        
 
         private void LoginClaims(IPerson user)
         {
@@ -102,7 +78,7 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult RegisterUser()
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
             return View();
@@ -110,11 +86,42 @@ namespace WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel registerModel)
+        public ActionResult RegisterUser(PersonViewModel registerModel)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
-            userRepository.Create((User)registerModel.ToIPerson());
-            return RedirectToAction("Login", "Account");
+            registerModel.Role = UserRole.User;
+            if (ModelState.IsValid)
+            {
+                userRepository.Create((User)registerModel.ToIPerson());
+                return RedirectToAction("UserLogin", "Account");
+            }
+            return View(registerModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminLogin(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                IPerson admin = new Admin()
+                {
+                    Role = UserRole.Outsider
+                };
+                admin = adminRepository.Get().FirstOrDefault(u => u.Nickname == model.Nickname &&
+                        u.Password == model.Password);
+
+                if (admin.Role == UserRole.Outsider)
+                {
+                    ModelState.AddModelError("", @"Wrong login or password.");
+                }
+                else
+                {
+                    LoginClaims(admin);
+                    return RedirectToAction("Games", "Admin");
+                }
+            }
+            return View(model);
         }
 
         [HttpGet]
@@ -128,11 +135,12 @@ namespace WebUI.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public ActionResult RegisterAdmin(RegisterViewModel registerModel)
+        public ActionResult RegisterAdmin(PersonViewModel registerModel)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
+            registerModel.Role = UserRole.Admin;
             adminRepository.Create((Admin)registerModel.ToIPerson());
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("AdminLogin", "Account");
         }
     }
 }

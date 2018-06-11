@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("WebUI")]
-namespace StoreDomain.Abstract
+namespace GameStore.StoreDomain.Abstract
 {
     public interface IGenericRepository<T> where T : class
     {

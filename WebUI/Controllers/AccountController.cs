@@ -12,13 +12,16 @@ namespace GameStore.WebUI.Controllers
     public class AccountController : Controller
     {
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-        private IGenericRepository<User> userRepository;
-        private IGenericRepository<Admin> adminRepository;
+        private readonly IGenericRepository<User> userRepository;
+        private readonly IGenericRepository<Admin> adminRepository;
+        private readonly IGenericRepository<UserCabinet> cabinetRepository;
 
-        public AccountController(IGenericRepository<User> users, IGenericRepository<Admin> admins)
+        public AccountController(IGenericRepository<User> users, IGenericRepository<Admin> admins,
+            IGenericRepository<UserCabinet> cabinets)
         {
             userRepository = users;
             adminRepository = admins;
+            cabinetRepository = cabinets;
         }
 
         [HttpGet]
@@ -41,13 +44,15 @@ namespace GameStore.WebUI.Controllers
                 user = userRepository.Get().FirstOrDefault(u => u.Nickname == model.Nickname &&
                         u.Password == model.Password);
 
-                if (user.Role == UserRole.Outsider)
+                if (user == null || user.Role == UserRole.Outsider)
                 {
                     ModelState.AddModelError("", @"Wrong login or password.");
                 }
                 else
                 {
                     LoginClaims(user);
+                    if (cabinetRepository.GetWithInclude(x => x.User).FirstOrDefault(x => x.User == user) == null)
+                        return RedirectToAction("CreateCabinet", "Home", new { id = user.GetPersonId() });
                     return RedirectToAction("Index", "Home");
                 }
             }

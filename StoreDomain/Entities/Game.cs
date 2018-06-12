@@ -43,6 +43,9 @@ namespace GameStore.StoreDomain.Entities
         [Required]
         public virtual GameAddition Addition { get; set; }
 
+        public byte[] PosterImageData { get; set; }
+        public string PosterImageMimeType { get; set; }
+
         public ICollection<Comment> Comments { get; set; }
     }
 }

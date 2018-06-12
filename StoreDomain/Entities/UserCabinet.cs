@@ -13,7 +13,6 @@ namespace GameStore.StoreDomain.Entities
         [Required]
         public string Address { get; set; }
         [Required]
-        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         public byte[] AvatarImageData { get; set; }

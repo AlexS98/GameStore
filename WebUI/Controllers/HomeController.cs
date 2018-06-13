@@ -4,13 +4,12 @@ using Microsoft.Owin.Security;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq;
-using GameStore.WebUI.Models.ViewModels;
 
 namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        private IAuthenticationManager AuthenticationManager => HttpContext?.GetOwinContext().Authentication;
         private readonly IGenericRepository<UserCabinet> cabinetRepository;
         private readonly IGenericRepository<User> userRepository;
 
@@ -23,7 +22,7 @@ namespace WebUI.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.UserName = AuthenticationManager.User.Identity.Name;
+            ViewBag.UserName = AuthenticationManager?.User.Identity.Name;
             return View();
         }
 
@@ -31,15 +30,12 @@ namespace WebUI.Controllers
         public ActionResult CreateCabinet(int id)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
-            UserCabinet cabinet = new UserCabinet()
-            {
-                User = userRepository.FindById(id)
-            };
-            return View(cabinet);
+            ViewBag.Id = id;
+            return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCabinet(int id, UserCabinetViewModel cabinet, HttpPostedFileBase image = null)
+        public ActionResult CreateCabinet(int id, UserCabinet cabinet, HttpPostedFileBase image = null)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
             cabinet.User = userRepository.FindById(id);
@@ -51,7 +47,7 @@ namespace WebUI.Controllers
                     cabinet.AvatarImageData = new byte[image.ContentLength];
                     image.InputStream.Read(cabinet.AvatarImageData, 0, image.ContentLength);
                 }
-                cabinetRepository.Create(cabinet.ToUserCabinet());
+                cabinetRepository.Create(cabinet);
                 return RedirectToAction("Index");
             }
             return View(cabinet);

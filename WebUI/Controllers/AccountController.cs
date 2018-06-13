@@ -116,7 +116,7 @@ namespace GameStore.WebUI.Controllers
                 admin = adminRepository.Get().FirstOrDefault(u => u.Nickname == model.Nickname &&
                         u.Password == model.Password);
 
-                if (admin.Role == UserRole.Outsider)
+                if (admin?.Role == UserRole.Outsider)
                 {
                     ModelState.AddModelError("", @"Wrong login or password.");
                 }

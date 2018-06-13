@@ -1,4 +1,4 @@
-﻿@model GameStore.WebUI.Models.ViewModels.UserCabinetViewModel
+﻿@model GameStore.StoreDomain.Entities.UserCabinet
 
 @{
     ViewBag.Title = "CreateCabinet";
@@ -11,7 +11,7 @@
     <div class="panel-heading">
         <h3>Edit user cabinet</h3>
     </div>
-    @using (Html.BeginForm("CreateCabinet", "Home", new { id = Model.User.GetPersonId() }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateCabinet", "Home", new { id = ViewBag.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">

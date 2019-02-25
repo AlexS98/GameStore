@@ -5,7 +5,7 @@ namespace GameStore.StoreDomain.Entities
 {
     public class User : IPerson
     {
-        public User() { }
+        [Required]
         public int UserId { get; set; }
         [Required]
         public string Nickname { get; set; }

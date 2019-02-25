@@ -1,4 +1,4 @@
-﻿@model GameStore.StoreDomain.Entities.UserCabinet
+﻿@model GameStore.WebUI.Models.ViewModels.CabinetViewModel
 
 @{
     ViewBag.Title = "CreateCabinet";
@@ -11,7 +11,7 @@
     <div class="panel-heading">
         <h3>Edit user cabinet</h3>
     </div>
-    @using (Html.BeginForm("CreateCabinet", "Home", new { id = ViewBag.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateCabinet", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">
@@ -21,7 +21,11 @@
                 switch (property.PropertyName)
                 {
                     case "UserCabinetId":
+                        TempData["id"] = Model.UserCabinetId;
+                        break;
                     case "User":
+                        TempData["user"] = Model.User;
+                        break;
                     case "AvatarImageData":
                     case "AvatarImageMimeType":
                         // do nothing
@@ -47,7 +51,7 @@
                     </a>
                     <span class='label label-info' id="upload-file-info"></span>
                 </div>
-                @if (Model.AvatarImageData == null)
+                @if (Model?.AvatarImageData == null)
                 {
                     <div class="form-control-static">No Image</div>
                 }

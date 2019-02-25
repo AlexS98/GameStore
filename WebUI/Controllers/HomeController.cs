@@ -30,7 +30,10 @@ namespace WebUI.Controllers
         public ActionResult CreateCabinet(int id)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
-            ViewBag.Id = id;
+            UserCabinet cabinet = new UserCabinet()
+            {
+
+            };
             return View();
         }
 
@@ -38,7 +41,8 @@ namespace WebUI.Controllers
         public ActionResult CreateCabinet(int id, UserCabinet cabinet, HttpPostedFileBase image = null)
         {
             ViewBag.UserName = AuthenticationManager.User.Identity.Name;
-            cabinet.User = userRepository.FindById(id);
+            cabinet.UserCabinetId = (int)TempData["id"];
+            cabinet.User = (User)TempData["user"];
             if (ModelState.IsValid)
             {
                 if (image != null)
